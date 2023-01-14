@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import useStyles from "../styles/HomePageStyle";
 
 function HomePage() {
-  const classes = useStyles();
+  const classes = useStyles({});
   return (
     <Box className={classes.root}>
       <Box className={classes.colorOverlay} />
