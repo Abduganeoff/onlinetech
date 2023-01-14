@@ -1,5 +1,9 @@
 import { useState } from "react";
+// components
 import TabPanel from "./TabelPanel";
+import TabContent from "./TabContent/TabContent";
+// data
+import { processors } from "./mockData";
 // styles
 import { Box, Button, Tab, Tabs, Typography } from "@material-ui/core";
 import useStyles from "./styles/StorageStyle";
@@ -21,7 +25,7 @@ function StorePage() {
     setValue(newValue);
   };
   return (
-    <Box>
+    <Box className={classes.root}>
       <Box className={classes.navBar}>
         <Typography align="center">
           Have questions? Write to: kontakt@artrel.pl
@@ -71,9 +75,12 @@ function StorePage() {
         <Tab label="Charger" {...a11yProps(9)} />
         <Tab label="Summary" {...a11yProps(10)} />
       </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
+      <TabContent
+        value={value}
+        index={0}
+        data={processors}
+        headerTitle="Processor type"
+      />
       <TabPanel value={value} index={1}>
         Item Two
       </TabPanel>
