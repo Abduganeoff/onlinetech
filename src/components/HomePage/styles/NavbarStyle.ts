@@ -1,6 +1,12 @@
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { StyleClasses } from "../common/helper";
-type ClassKey = "root";
+import { StyleClasses } from "../../../common/helper";
+type ClassKey =
+  | "root"
+  | "HeaderTitle"
+  | "artText"
+  | "navItems"
+  | "navItem"
+  | "ListItemText";
 interface StyleProps {
   classes?: StyleClasses<ClassKey | string>;
 }

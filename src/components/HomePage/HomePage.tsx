@@ -1,7 +1,9 @@
 import { Box } from "@material-ui/core";
-import Navbar from "./Navbar";
+
 // styles
-import useStyles from "../styles/HomePageStyle";
+import useStyles from "./styles/HomePageStyle";
+import MainContentHomePage from "./MainContentHomePage";
+import Navbar from "./Navbar";
 
 function HomePage() {
   const classes = useStyles({});
@@ -9,6 +11,7 @@ function HomePage() {
     <Box className={classes.root}>
       <Box className={classes.colorOverlay} />
       <Navbar />
+      <MainContentHomePage />
     </Box>
   );
 }

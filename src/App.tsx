@@ -1,9 +1,9 @@
-import HomePage from "./components/HomePage";
+import StorePage from "./components/StorePage/StorePage";
 
 function App() {
   return (
-    <div style={{ height: "100%" }}>
-      <HomePage />
+    <div>
+      <StorePage />
     </div>
   );
 }

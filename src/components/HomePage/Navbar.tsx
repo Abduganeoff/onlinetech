@@ -1,5 +1,5 @@
 import { Box, List, ListItem, Typography } from "@material-ui/core";
-import useStyles from "../styles/NavbarStyle";
+import useStyles from "./styles/NavbarStyle";
 
 function Navbar() {
   const classes = useStyles({});

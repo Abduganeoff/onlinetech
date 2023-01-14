@@ -1,5 +1,5 @@
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { StyleClasses } from "../common/helper";
+import { StyleClasses } from "../../../common/helper";
 type ClassKey = "root" | "colorOverlay";
 interface StyleProps {
   classes?: StyleClasses<ClassKey | string>;
