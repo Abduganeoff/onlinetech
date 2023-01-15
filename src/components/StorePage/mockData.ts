@@ -8,6 +8,8 @@ export interface ProcessorsType extends CommonType {
   subTitle: string;
 }
 
+export type GraphicCardType = Omit<CommonType, "imgSrc">;
+
 export const headerTitles: string[] = [
   "Processor type",
   "Choose an enclosure",
@@ -140,5 +142,103 @@ export const chips: CommonType[] = [
     title: "i9-12900KF",
     imgSrc: "assets/chips/12700KF.png",
     price: 1200,
+  },
+];
+
+export const coolers: CommonType[] = [
+  {
+    title: "MasterLiquid ML240L RGB",
+    imgSrc: "assets/coolers/master-liquid-240-rgb.jpeg",
+    price: 600,
+  },
+  {
+    title: "Pure Loop 240mm",
+    imgSrc: "assets/coolers/master-liquid-240.jpeg",
+    price: 819,
+  },
+  {
+    title: "Pure Loop 2 FX 240",
+    imgSrc: "assets/coolers/kraken-x53-rgb.jpeg",
+    price: 475,
+  },
+  {
+    title: "Kraken X53 240mm RGB",
+    imgSrc:
+      "assets/coolers/cooler-master-masterliquid-ml240l-v2-rgb-white-2x120mm.jpeg",
+    price: 499,
+  },
+];
+
+export const graphicCards: GraphicCardType[] = [
+  {
+    title: "Nvidia GeForce GTX 1650 4GB",
+    price: 849,
+  },
+  {
+    title: "Nvidia GeForce RTX 3050 8GB",
+    price: 1200,
+  },
+  {
+    title: "Nvidia GeForce RTX 3060 12GB",
+    price: 1300,
+  },
+  {
+    title: "Nvidia GeForce RTX 3060 Ti 8GB",
+    price: 1545,
+  },
+  {
+    title: "Nvidia GeForce RTX 3070 8GB",
+    price: 1656,
+  },
+  {
+    title: "Nvidia GeForce RTX 3070 Ti 8GB",
+    price: 1789,
+  },
+  {
+    title: "Nvidia GeForce RTX 4070 Ti 12GB",
+    price: 1999,
+  },
+  {
+    title: "Nvidia GeForce RTX 3080 10GB",
+    price: 2000,
+  },
+  {
+    title: "Nvidia GeForce RTX 3090 24GB",
+    price: 2100,
+  },
+  {
+    title: "Nvidia GeForce RTX 3090 Ti 24GB",
+    price: 2199,
+  },
+  {
+    title: "Nvidia GeForce RTX 4080 16GB",
+    price: 2399,
+  },
+  {
+    title: "Nvidia GeForce RTX 4090 24GB",
+    price: 2499,
+  },
+];
+
+export const motherboards: CommonType[] = [
+  {
+    title: "Gigabyte H610M H",
+    imgSrc: "assets/motherboards/asus4.jpeg",
+    price: 600,
+  },
+  {
+    title: "Gigabyte B660M DS3H AX",
+    imgSrc: "assets/motherboards/asus3.jpg",
+    price: 1069,
+  },
+  {
+    title: "Gigabyte Z690 UD AX DDR4",
+    imgSrc: "assets/motherboards/asus2.jpg",
+    price: 1739,
+  },
+  {
+    title: "ASUS TUF GAMING Z690-PLUS WIFI DDR4",
+    imgSrc: "assets/motherboards/asus.jpeg",
+    price: 1069,
   },
 ];

@@ -5,6 +5,13 @@ import useStyles from "./styles/TabContentStyles";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
+export const CustomizedCheckbox = ({ classes }: any) => (
+  <Checkbox
+    className={classes.checkbox}
+    icon={<RadioButtonUncheckedIcon />}
+    checkedIcon={<CheckCircleIcon />}
+  />
+);
 const Product = ({
   imgSrc,
   subTitle,
@@ -32,11 +39,7 @@ const Product = ({
         <img src={imgSrc} alt={`${title}-pic`} />
       </Box>
       <Typography align="center">{`PLN ${price}`}</Typography>
-      <Checkbox
-        className={classes.checkbox}
-        icon={<RadioButtonUncheckedIcon />}
-        checkedIcon={<CheckCircleIcon />}
-      />
+      <CustomizedCheckbox classes={classes} />
     </Paper>
   );
 };

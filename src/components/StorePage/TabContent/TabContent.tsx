@@ -8,12 +8,13 @@ interface TabContentProps {
   headerTitle: string;
   index: number;
   value: number;
+  isList?: boolean;
   data: DataType;
 }
 
 const TabContent = (props: TabContentProps) => {
   const classes = useStyles({});
-  const { headerTitle, data, value, index, ...other } = props;
+  const { headerTitle, data, value, index, isList = false, ...other } = props;
   return (
     <div
       role="tabpanel"
@@ -33,17 +34,24 @@ const TabContent = (props: TabContentProps) => {
               } of 11`}</Typography>
             </Box>
             {
-              <div className={classes.processorCardContainer}>
-                {data.map((item: any) => (
+              <Box
+                className={
+                  isList
+                    ? classes.listItemContainer
+                    : classes.processorCardContainer
+                }
+              >
+                {data.map((item: any, indx) => (
                   <TabContentItem
                     contentType={headerTitle}
                     title={item.title}
                     subTitle={item.subTitle}
                     imgSrc={item.imgSrc}
                     price={item.price}
+                    key={indx}
                   />
                 ))}
-              </div>
+              </Box>
             }
           </>
         </Box>

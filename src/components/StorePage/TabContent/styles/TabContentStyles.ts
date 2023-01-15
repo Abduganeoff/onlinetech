@@ -57,6 +57,25 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
       },
     },
   },
+
+  listItemContainer: {
+    width: "90%",
+    paddingLeft: "2rem",
+  },
+  paperContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "2rem 2rem",
+    marginBottom: "2rem",
+  },
+  rightAction: {
+    display: "flex",
+    alignItems: "center",
+  },
+  cardTitle: {
+    fontWeight: 600,
+  },
 }));
 
 export default useStyles;
