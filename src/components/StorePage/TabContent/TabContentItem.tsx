@@ -29,13 +29,17 @@ function TabContentItem({ title, subTitle, imgSrc, contentType, price }: any) {
           />
         );
       case headerTitles[3]:
+      case headerTitles[9]:
         return (
           <Paper className={classes.paperContainer} elevation={2}>
             <Typography style={{ fontWeight: 600 }} variant="h5">
               {title}
             </Typography>
             <Box className={classes.rightAction}>
-              <Typography variant="h5" style={{ fontWeight: 600 }}>
+              <Typography
+                variant="h5"
+                style={{ fontWeight: 600, marginRight: "1.5rem" }}
+              >
                 {`PLN ${price}`}
               </Typography>
               <CustomizedCheckbox classes={classes} />

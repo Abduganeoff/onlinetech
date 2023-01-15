@@ -8,7 +8,7 @@ export interface ProcessorsType extends CommonType {
   subTitle: string;
 }
 
-export type GraphicCardType = Omit<CommonType, "imgSrc">;
+export type ListPanelType = Omit<CommonType, "imgSrc">;
 
 export const headerTitles: string[] = [
   "Processor type",
@@ -169,7 +169,7 @@ export const coolers: CommonType[] = [
   },
 ];
 
-export const graphicCards: GraphicCardType[] = [
+export const graphicCards: ListPanelType[] = [
   {
     title: "Nvidia GeForce GTX 1650 4GB",
     price: 849,
@@ -240,5 +240,36 @@ export const motherboards: CommonType[] = [
     title: "ASUS TUF GAMING Z690-PLUS WIFI DDR4",
     imgSrc: "assets/motherboards/asus.jpeg",
     price: 1069,
+  },
+];
+
+export const chargers: ListPanelType[] = [
+  {
+    title: "450W 80 Plus",
+    price: 200,
+  },
+  {
+    title: "500W 80 Plus Bronze",
+    price: 250,
+  },
+  {
+    title: "550W 80 Plus",
+    price: 350,
+  },
+  {
+    title: "600W 80 Plus Bronze",
+    price: 300,
+  },
+  {
+    title: "700W 80 Plus Bronze",
+    price: 400,
+  },
+  {
+    title: "750W 80 Plus Gold",
+    price: 450,
+  },
+  {
+    title: "850W 80 Plus Gold",
+    price: 500,
   },
 ];

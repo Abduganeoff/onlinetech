@@ -11,6 +11,7 @@ import {
   coolers,
   graphicCards,
   motherboards,
+  chargers,
 } from "./mockData";
 // styles
 import { Box, Button, Tab, Tabs, Typography } from "@material-ui/core";
@@ -129,6 +130,13 @@ function StorePage() {
         <TabPanel value={value} index={5}>
           Item Six
         </TabPanel>
+        <TabContent
+          value={value}
+          index={9}
+          headerTitle={headerTitles[9]}
+          data={chargers}
+          isList={true}
+        />
       </Box>
     </Box>
   );

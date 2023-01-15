@@ -1,3 +1,3 @@
-import { CommonType, GraphicCardType, ProcessorsType } from "./mockData";
+import { CommonType, ListPanelType, ProcessorsType } from "./mockData";
 
-export type DataType = ProcessorsType[] | CommonType[] | GraphicCardType[];
+export type DataType = ProcessorsType[] | CommonType[] | ListPanelType[];
