@@ -3,7 +3,7 @@ import { useState } from "react";
 import TabPanel from "./TabelPanel";
 import TabContent from "./TabContent/TabContent";
 // data
-import { processors } from "./mockData";
+import { headerTitles, processors, cases, chips } from "./mockData";
 // styles
 import { Box, Button, Tab, Tabs, Typography } from "@material-ui/core";
 import useStyles from "./styles/StorageStyle";
@@ -82,12 +82,19 @@ function StorePage() {
           data={processors}
           headerTitle="Processor type"
         />
-        <TabPanel value={value} index={1}>
-          Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          Item Three
-        </TabPanel>
+        <TabContent
+          value={value}
+          index={1}
+          headerTitle={headerTitles[1]}
+          data={cases}
+        />
+
+        <TabContent
+          value={value}
+          index={2}
+          headerTitle={headerTitles[2]}
+          data={chips}
+        />
         <TabPanel value={value} index={3}>
           Item Four
         </TabPanel>

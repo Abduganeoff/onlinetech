@@ -1,12 +1,14 @@
 import { Box, Typography } from "@material-ui/core";
+import { ProcessorsType } from "../mockData";
+import { DataType } from "../types";
 import useStyles from "./styles/TabContentStyles";
 import TabContentItem from "./TabContentItem";
 
 interface TabContentProps {
-  headerTitle: React.ReactNode;
+  headerTitle: string;
   index: number;
   value: number;
-  data: Record<string, unknown>[];
+  data: DataType;
 }
 
 const TabContent = (props: TabContentProps) => {
@@ -32,11 +34,13 @@ const TabContent = (props: TabContentProps) => {
             </Box>
             {
               <div className={classes.processorCardContainer}>
-                {data.map((item: Record<string, unknown>) => (
+                {data.map((item: any) => (
                   <TabContentItem
+                    contentType={headerTitle}
                     title={item.title}
                     subTitle={item.subTitle}
-                    brandLogo={item.brandLogo}
+                    imgSrc={item.imgSrc}
+                    price={item.price}
                   />
                 ))}
               </div>
