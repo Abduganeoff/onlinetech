@@ -1,5 +1,5 @@
 import { Box, Typography } from "@material-ui/core";
-import { ProcessorsType } from "../mockData";
+import { useEffect, useState } from "react";
 import { DataType } from "../types";
 import useStyles from "./styles/TabContentStyles";
 import TabContentItem from "./TabContentItem";
@@ -10,11 +10,41 @@ interface TabContentProps {
   value: number;
   isList?: boolean;
   data: DataType;
+  setIsDisabled?: (arg: boolean) => void;
 }
 
 const TabContent = (props: TabContentProps) => {
   const classes = useStyles({});
-  const { headerTitle, data, value, index, isList = false, ...other } = props;
+  const {
+    headerTitle,
+    data,
+    value,
+    index,
+    isList = false,
+    setIsDisabled,
+    ...other
+  } = props;
+  const [state, setState] = useState<DataType>(data);
+
+  useEffect(() => {
+    if (setIsDisabled) {
+      const bool = state.some((item) => item.checked === true);
+      setIsDisabled(bool);
+    }
+  }, [state]);
+
+  const handleClick = (id: number) => {
+    const newData = state.map((item) => {
+      if (id === item.id) {
+        return item.checked ? item : { ...item, checked: true };
+      }
+
+      return { ...item, checked: false };
+    });
+
+    setState(newData);
+  };
+
   return (
     <div
       role="tabpanel"
@@ -41,14 +71,18 @@ const TabContent = (props: TabContentProps) => {
                     : classes.processorCardContainer
                 }
               >
-                {data.map((item: any, indx) => (
+                {state.map((item: any) => (
                   <TabContentItem
                     contentType={headerTitle}
                     title={item.title}
                     subTitle={item.subTitle}
                     imgSrc={item.imgSrc}
                     price={item.price}
-                    key={indx}
+                    discountPrice={item.price - 50 <= 0 ? 50 : item.price - 50}
+                    id={item.id}
+                    key={item.id}
+                    handleClick={handleClick}
+                    checked={item.checked}
                   />
                 ))}
               </Box>

@@ -1,9 +1,8 @@
 import {
   Box,
-  Checkbox,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
+  Card,
+  CardActions,
+  CardContent,
   Paper,
   Typography,
 } from "@material-ui/core";
@@ -11,7 +10,17 @@ import { headerTitles } from "../mockData";
 import Product, { CustomizedCheckbox } from "./Product";
 import useStyles from "./styles/TabContentStyles";
 
-function TabContentItem({ title, subTitle, imgSrc, contentType, price }: any) {
+function TabContentItem({
+  title,
+  subTitle,
+  imgSrc,
+  contentType,
+  price,
+  discountPrice,
+  id,
+  handleClick,
+  checked,
+}: any) {
   const classes = useStyles({});
   const renderContentItem = () => {
     switch (contentType) {
@@ -26,6 +35,9 @@ function TabContentItem({ title, subTitle, imgSrc, contentType, price }: any) {
             subTitle={subTitle}
             imgSrc={imgSrc}
             price={price}
+            id={id}
+            handleClick={handleClick}
+            checked={checked}
           />
         );
       case headerTitles[3]:
@@ -42,9 +54,50 @@ function TabContentItem({ title, subTitle, imgSrc, contentType, price }: any) {
               >
                 {`PLN ${price}`}
               </Typography>
-              <CustomizedCheckbox classes={classes} />
+              <CustomizedCheckbox
+                handleClick={handleClick}
+                id={id}
+                classes={classes}
+                checked={checked}
+              />
             </Box>
           </Paper>
+        );
+      case headerTitles[4]:
+      case headerTitles[5]:
+      case headerTitles[8]:
+        return (
+          <Card raised style={{ width: "32%" }}>
+            <CardContent>
+              <Typography
+                align="center"
+                variant="h4"
+                style={{ fontWeight: 500 }}
+              >
+                {title}
+              </Typography>
+              <Typography align="center">{subTitle}</Typography>
+              <Typography align="center" variant="subtitle2">
+                <span style={{ textDecoration: "line-through", color: "red" }}>
+                  {price + " zl"}
+                </span>
+                {` PLN ${discountPrice}`}
+              </Typography>
+              <CardActions
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <CustomizedCheckbox
+                  handleClick={handleClick}
+                  id={id}
+                  classes={classes}
+                  checked={checked}
+                />
+              </CardActions>
+            </CardContent>
+          </Card>
         );
       default:
         break;

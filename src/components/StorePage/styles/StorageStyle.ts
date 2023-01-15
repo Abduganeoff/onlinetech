@@ -6,7 +6,6 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
-  root: { flexGrow: 1, padding: "0 5rem" },
   tabContentContainer: {
     padding: "0 6rem",
   },
@@ -24,13 +23,34 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
       fontWeight: 900,
     },
   },
-
   btnBack: {
     position: "absolute",
+    color: "#5D7C89",
     left: 30,
     top: 40,
     "&:hover": {
       backgroundColor: "lightgrey",
+    },
+  },
+  footer: {
+    position: "fixed",
+    left: 0,
+    bottom: 0,
+    width: "100%",
+    height: "5rem",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  footerBtn: {
+    background: "#03a9f4",
+    color: "white",
+    width: "12rem",
+    height: "3.5rem",
+    borderRadius: "50px",
+    marginRight: "3rem",
+    "&:hover": {
+      background: "#03a9f4",
     },
   },
 }));

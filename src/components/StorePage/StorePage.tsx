@@ -1,6 +1,5 @@
 import { useState } from "react";
 // components
-import TabPanel from "./TabelPanel";
 import TabContent from "./TabContent/TabContent";
 // data
 import {
@@ -12,16 +11,46 @@ import {
   graphicCards,
   motherboards,
   chargers,
+  disks,
+  rams,
+  secondDisks,
 } from "./mockData";
 // styles
-import { Box, Button, Tab, Tabs, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  IconButton,
+  Paper,
+  Snackbar,
+  Tab,
+  Tabs,
+  Typography,
+} from "@material-ui/core";
 import useStyles from "./styles/StorageStyle";
 // icons
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import CloseIcon from "@material-ui/icons/Close";
 
+const lables = [
+  "Start",
+  "Case",
+  "Processor",
+  "Graphic",
+  "Disk",
+  "Ram",
+  "Motherboard",
+  "Cooling",
+  "Second Disk",
+  "Charger",
+  "Summary",
+  "Order",
+];
 function StorePage() {
   const classes = useStyles({});
   const [value, setValue] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [open, setOpen] = useState(false);
 
   function a11yProps(index: any) {
     return {
@@ -30,11 +59,21 @@ function StorePage() {
     };
   }
 
+  const handleCloseSnackBar = (
+    event: React.SyntheticEvent | React.MouseEvent,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
   return (
-    <Box className={classes.root}>
+    <Box>
       <Box className={classes.navBar}>
         <Typography align="center">
           Have questions? Write to: kontakt@artrel.pl
@@ -73,16 +112,16 @@ function StorePage() {
         aria-label="scrollable auto tabs example"
       >
         <Tab label="Start" {...a11yProps(0)} />
-        <Tab label="Case" {...a11yProps(1)} />
-        <Tab label="Processor" {...a11yProps(2)} />
-        <Tab label="Graphic" {...a11yProps(3)} />
-        <Tab label="Disk" {...a11yProps(4)} />
-        <Tab label="Ram" {...a11yProps(5)} />
-        <Tab label="Motherboard" {...a11yProps(6)} />
-        <Tab label="Cooling" {...a11yProps(7)} />
-        <Tab label="Second Disk" {...a11yProps(8)} />
-        <Tab label="Charger" {...a11yProps(9)} />
-        <Tab label="Summary" {...a11yProps(10)} />
+        <Tab disabled={!isDisabled} label="Case" {...a11yProps(1)} />
+        <Tab disabled={!isDisabled} label="Processor" {...a11yProps(2)} />
+        <Tab disabled={!isDisabled} label="Graphic" {...a11yProps(3)} />
+        <Tab disabled={!isDisabled} label="Disk" {...a11yProps(4)} />
+        <Tab disabled={!isDisabled} label="Ram" {...a11yProps(5)} />
+        <Tab disabled={!isDisabled} label="Motherboard" {...a11yProps(6)} />
+        <Tab disabled={!isDisabled} label="Cooling" {...a11yProps(7)} />
+        <Tab disabled={!isDisabled} label="Second Disk" {...a11yProps(8)} />
+        <Tab disabled={!isDisabled} label="Charger" {...a11yProps(9)} />
+        <Tab disabled={!isDisabled} label="Summary" {...a11yProps(10)} />
       </Tabs>
       <Box className={classes.tabContentContainer}>
         <TabContent
@@ -90,6 +129,7 @@ function StorePage() {
           index={0}
           data={processors}
           headerTitle="Processor type"
+          setIsDisabled={setIsDisabled}
         />
         <TabContent
           value={value}
@@ -113,6 +153,18 @@ function StorePage() {
         />
         <TabContent
           value={value}
+          index={4}
+          headerTitle={headerTitles[4]}
+          data={disks}
+        />
+        <TabContent
+          value={value}
+          index={5}
+          headerTitle={headerTitles[5]}
+          data={rams}
+        />
+        <TabContent
+          value={value}
           index={6}
           headerTitle={headerTitles[6]}
           data={motherboards}
@@ -123,13 +175,13 @@ function StorePage() {
           headerTitle={headerTitles[7]}
           data={coolers}
         />
+        <TabContent
+          value={value}
+          index={8}
+          headerTitle={headerTitles[8]}
+          data={secondDisks}
+        />
 
-        <TabPanel value={value} index={4}>
-          Item Five
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          Item Six
-        </TabPanel>
         <TabContent
           value={value}
           index={9}
@@ -138,6 +190,67 @@ function StorePage() {
           isList={true}
         />
       </Box>
+      <Paper elevation={5} className={classes.footer}>
+        <Box></Box>
+        <Box>
+          {value > 0 && (
+            <IconButton
+              style={{ background: "rgba(0, 0, 0, 0.12)", marginRight: "1rem" }}
+              color="default"
+              aria-label="delete"
+              onClick={() => setValue((prev) => prev - 1)}
+            >
+              <ArrowBackIosIcon />
+            </IconButton>
+          )}
+          {value === 10 && (
+            <>
+              <Button
+                className={classes.footerBtn}
+                variant="contained"
+                size="large"
+                endIcon={<NavigateNextIcon />}
+                onClick={() => setOpen(true)}
+              >
+                Copy Link
+              </Button>
+              <Snackbar
+                ContentProps={{
+                  style: { background: "black", color: "white" },
+                }}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackBar}
+                message="Configuration link copied to clipboard"
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    className={classes.close}
+                    onClick={() => setOpen(false)}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                }
+              />
+            </>
+          )}
+          <Button
+            disabled={!isDisabled}
+            className={classes.footerBtn}
+            variant="contained"
+            size="large"
+            endIcon={<NavigateNextIcon />}
+            onClick={() => setValue((prev) => prev + 1)}
+          >
+            {lables[value + 1]}
+          </Button>
+        </Box>
+      </Paper>
     </Box>
   );
 }
