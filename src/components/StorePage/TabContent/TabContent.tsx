@@ -1,5 +1,5 @@
 import { Box, Typography } from "@material-ui/core";
-import useStyles from "../styles/StorageStyle";
+import useStyles from "./styles/TabContentStyles";
 import TabContentItem from "./TabContentItem";
 
 interface TabContentProps {

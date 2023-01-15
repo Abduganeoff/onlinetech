@@ -7,20 +7,8 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   root: { flexGrow: 1, padding: "0 5rem" },
-
-  tabContent: {
-    padding: "3rem 2rem",
-  },
-  processorCardContainer: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "1rem",
-  },
-  tabContentHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "2rem",
+  tabContentContainer: {
+    padding: "0 6rem",
   },
   navBar: {
     backgroundColor: "#03a9f4",

@@ -75,30 +75,32 @@ function StorePage() {
         <Tab label="Charger" {...a11yProps(9)} />
         <Tab label="Summary" {...a11yProps(10)} />
       </Tabs>
-      <TabContent
-        value={value}
-        index={0}
-        data={processors}
-        headerTitle="Processor type"
-      />
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
+      <Box className={classes.tabContentContainer}>
+        <TabContent
+          value={value}
+          index={0}
+          data={processors}
+          headerTitle="Processor type"
+        />
+        <TabPanel value={value} index={1}>
+          Item Two
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          Item Three
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          Item Four
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          Item Five
+        </TabPanel>
+        <TabPanel value={value} index={5}>
+          Item Six
+        </TabPanel>
+        <TabPanel value={value} index={6}>
+          Item Seven
+        </TabPanel>
+      </Box>
     </Box>
   );
 }

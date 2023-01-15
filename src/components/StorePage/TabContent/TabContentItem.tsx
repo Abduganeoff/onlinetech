@@ -1,6 +1,9 @@
-import { Box, Paper, Typography } from "@material-ui/core";
-import React from "react";
+import { Box, Checkbox, Paper, Typography } from "@material-ui/core";
+// styles
 import useStyles from "./styles/TabContentStyles";
+// icons
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
 interface TabContentItemProps {
   title: string;
@@ -22,6 +25,11 @@ function TabContentItem({ title, subTitle, brandLogo }: any) {
       <Box className={classes.imgContainer}>
         <img src={brandLogo} alt={`${title}-pic`} />
       </Box>
+      <Checkbox
+        className={classes.checkbox}
+        icon={<RadioButtonUncheckedIcon />}
+        checkedIcon={<CheckCircleIcon />}
+      />
     </Paper>
   );
 }
