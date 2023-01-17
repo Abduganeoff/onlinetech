@@ -67,7 +67,6 @@ const lables = [
   "Summary",
   "Order",
 ];
-const MyLink = (props: any) => <Link to="/" {...props} />;
 
 function StorePage() {
   const classes = useStyles({});
@@ -125,7 +124,8 @@ function StorePage() {
       </Box>
       <Box>
         <Button
-          component={MyLink}
+          component={Link}
+          to="/"
           className={classes.btnBack}
           variant="outlined"
           color="inherit"

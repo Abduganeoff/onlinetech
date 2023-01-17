@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { Box, Button, Typography } from "@material-ui/core";
 import useStyles from "./styles/MainContentHomePageStyle";
 
-const MyLink = (props: any) => <Link to="/store" {...props} />;
-
 function MainContentHomePage() {
   const classes = useStyles({});
 
@@ -21,7 +19,8 @@ function MainContentHomePage() {
           Offerta
         </Button>
         <Button
-          component={MyLink}
+          component={Link}
+          to="/store"
           className={classes.btnKonfigure}
           color="inherit"
           variant="outlined"
