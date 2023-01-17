@@ -11,6 +11,7 @@ interface TabContentProps {
   isList?: boolean;
   data: DataType;
   setIsDisabled?: (arg: boolean) => void;
+  setSelectedProduct: (arg: any) => void;
 }
 
 const TabContent = (props: TabContentProps) => {
@@ -22,6 +23,7 @@ const TabContent = (props: TabContentProps) => {
     index,
     isList = false,
     setIsDisabled,
+    setSelectedProduct,
     ...other
   } = props;
   const [state, setState] = useState<DataType>(data);
@@ -31,6 +33,21 @@ const TabContent = (props: TabContentProps) => {
       const bool = state.some((item) => item.checked === true);
       setIsDisabled(bool);
     }
+    const items = window.localStorage.getItem("selectedItems");
+    if (items) {
+      window.localStorage.setItem(
+        "selectedItems",
+        JSON.stringify({ ...JSON.parse(items), [value]: state })
+      );
+    } else {
+      window.localStorage.setItem(
+        "selectedItems",
+        JSON.stringify({ [value]: state })
+      );
+    }
+    setSelectedProduct(
+      JSON.parse(window.localStorage.getItem("selectedItems") || "{}")
+    );
   }, [state]);
 
   const handleClick = (id: number) => {

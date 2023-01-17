@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // components
 import TabContent from "./TabContent/TabContent";
 // data
@@ -19,11 +19,17 @@ import {
 import {
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   IconButton,
   Paper,
   Snackbar,
   Tab,
   Tabs,
+  TextField,
   Typography,
 } from "@material-ui/core";
 import useStyles from "./styles/StorageStyle";
@@ -31,7 +37,22 @@ import useStyles from "./styles/StorageStyle";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import CloseIcon from "@material-ui/icons/Close";
-
+import Summary from "./Summary";
+import { Link } from "react-router-dom";
+interface ValueKeys {
+  0: number;
+  1: number;
+  2: number;
+  3: number;
+  4: number;
+  5: number;
+  6: number;
+  7: number;
+  8: number;
+  9: number;
+  10: number;
+  11: number;
+}
 const lables = [
   "Start",
   "Case",
@@ -46,12 +67,28 @@ const lables = [
   "Summary",
   "Order",
 ];
+const MyLink = (props: any) => <Link to="/" {...props} />;
+
 function StorePage() {
   const classes = useStyles({});
-  const [value, setValue] = useState(0);
+  const [arg, setValue] = useState(0);
   const [isDisabled, setIsDisabled] = useState(true);
   const [open, setOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
+  const [currentItem, setCurrentItem] = useState<any>();
+  const [isOpenForm, setIsOpenForm] = useState(false);
 
+  useEffect(() => {
+    const items = window.localStorage.getItem("selectedItems");
+    if (items) {
+      const parsedItems = JSON.parse(items);
+      let item = parsedItems[arg].filter((x: any) => x.checked === true);
+      setCurrentItem(item[0]);
+    }
+    if (!isDisabled) {
+      window.localStorage.clear();
+    }
+  }, [selectedProduct]);
   function a11yProps(index: any) {
     return {
       id: `scrollable-auto-tab-${index}`,
@@ -72,6 +109,13 @@ function StorePage() {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+  const handleNextButton = () => {
+    if (arg === 10) {
+      setIsOpenForm(true);
+    } else {
+      setValue((prev) => prev + 1);
+    }
+  };
   return (
     <Box>
       <Box className={classes.navBar}>
@@ -81,6 +125,7 @@ function StorePage() {
       </Box>
       <Box>
         <Button
+          component={MyLink}
           className={classes.btnBack}
           variant="outlined"
           color="inherit"
@@ -103,7 +148,7 @@ function StorePage() {
         </Box>
       </Box>
       <Tabs
-        value={value}
+        value={arg}
         onChange={handleChange}
         indicatorColor="primary"
         textColor="primary"
@@ -125,75 +170,109 @@ function StorePage() {
       </Tabs>
       <Box className={classes.tabContentContainer}>
         <TabContent
-          value={value}
+          value={arg}
           index={0}
           data={processors}
           headerTitle="Processor type"
           setIsDisabled={setIsDisabled}
+          setSelectedProduct={setSelectedProduct}
         />
         <TabContent
-          value={value}
+          value={arg}
           index={1}
           headerTitle={headerTitles[1]}
           data={cases}
+          setSelectedProduct={setSelectedProduct}
         />
 
         <TabContent
-          value={value}
+          value={arg}
           index={2}
           headerTitle={headerTitles[2]}
           data={chips}
+          setSelectedProduct={setSelectedProduct}
         />
         <TabContent
-          value={value}
+          value={arg}
           index={3}
           headerTitle={headerTitles[3]}
           data={graphicCards}
           isList={true}
+          setSelectedProduct={setSelectedProduct}
         />
         <TabContent
-          value={value}
+          value={arg}
           index={4}
           headerTitle={headerTitles[4]}
           data={disks}
+          setSelectedProduct={setSelectedProduct}
         />
         <TabContent
-          value={value}
+          value={arg}
           index={5}
           headerTitle={headerTitles[5]}
           data={rams}
+          setSelectedProduct={setSelectedProduct}
         />
         <TabContent
-          value={value}
+          value={arg}
           index={6}
           headerTitle={headerTitles[6]}
           data={motherboards}
+          setSelectedProduct={setSelectedProduct}
         />
         <TabContent
-          value={value}
+          value={arg}
           index={7}
           headerTitle={headerTitles[7]}
           data={coolers}
+          setSelectedProduct={setSelectedProduct}
         />
         <TabContent
-          value={value}
+          value={arg}
           index={8}
           headerTitle={headerTitles[8]}
           data={secondDisks}
+          setSelectedProduct={setSelectedProduct}
         />
 
         <TabContent
-          value={value}
+          value={arg}
           index={9}
           headerTitle={headerTitles[9]}
           data={chargers}
           isList={true}
+          setSelectedProduct={setSelectedProduct}
         />
+        <Summary value={arg} index={10} selectedProduct={selectedProduct} />
       </Box>
       <Paper elevation={5} className={classes.footer}>
-        <Box></Box>
+        <Box style={{ display: "flex" }}>
+          {currentItem?.imgSrc ? (
+            <img className={classes.img} src={currentItem?.imgSrc} />
+          ) : (
+            <span className={classes.img} />
+          )}
+          {currentItem?.price && (
+            <Box
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignContent: "center",
+                marginLeft: "1rem",
+              }}
+            >
+              <Typography variant="subtitle2" style={{ display: "block" }}>
+                Total(gross)
+              </Typography>
+              <Typography variant="h4">{`${currentItem?.price} PLN`}</Typography>
+            </Box>
+          )}
+        </Box>
+
         <Box>
-          {value > 0 && (
+          {arg > 0 && (
             <IconButton
               style={{ background: "rgba(0, 0, 0, 0.12)", marginRight: "1rem" }}
               color="default"
@@ -203,7 +282,7 @@ function StorePage() {
               <ArrowBackIosIcon />
             </IconButton>
           )}
-          {value === 10 && (
+          {arg === 10 && (
             <>
               <Button
                 className={classes.footerBtn}
@@ -245,12 +324,69 @@ function StorePage() {
             variant="contained"
             size="large"
             endIcon={<NavigateNextIcon />}
-            onClick={() => setValue((prev) => prev + 1)}
+            onClick={handleNextButton}
           >
-            {lables[value + 1]}
+            {lables[arg + 1]}
           </Button>
         </Box>
       </Paper>
+      {
+        <Dialog
+          open={isOpenForm}
+          onClose={() => setIsOpenForm(false)}
+          aria-labelledby="draggable-dialog-title"
+          fullWidth
+        >
+          <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+            Subscribe
+          </DialogTitle>
+          <DialogContent>
+            <form className={classes.root} noValidate autoComplete="off">
+              <Box style={{ display: "flex", flexDirection: "column" }}>
+                <TextField
+                  id="standard-error"
+                  label="Delivery method"
+                  defaultValue="Courier (free)"
+                />
+                <TextField
+                  id="standard-error-helper-text"
+                  label="Payment method"
+                  defaultValue="Online payment"
+                />
+                <TextField
+                  id="standard-error-helper-text"
+                  defaultValue="Traditional transfer"
+                />
+                <TextField
+                  id="standard-error-helper-text"
+                  defaultValue="Cash on delivery (advance 30%)"
+                />
+                <TextField
+                  id="standard-error"
+                  label="The recipient's details"
+                  defaultValue="Name *"
+                />
+                <TextField id="standard-error" defaultValue="Address *" />
+                <TextField id="standard-error" defaultValue="Postcode *" />
+                <TextField id="standard-error" defaultValue="City *" />
+                <TextField id="standard-error" defaultValue="Email *" />
+              </Box>
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              autoFocus
+              onClick={() => setIsOpenForm(false)}
+              color="primary"
+            >
+              Cancel
+            </Button>
+            <Button onClick={() => setIsOpenForm(false)} color="primary">
+              Order
+            </Button>
+          </DialogActions>
+        </Dialog>
+      }
     </Box>
   );
 }

@@ -37,7 +37,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     left: 0,
     bottom: 0,
     width: "100%",
-    height: "5rem",
+    height: "4rem",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -52,6 +52,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     "&:hover": {
       background: "#03a9f4",
     },
+  },
+  img: {
+    width: "180px",
+    height: "90px",
   },
 }));
 
